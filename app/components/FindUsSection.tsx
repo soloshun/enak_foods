@@ -1,8 +1,18 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
+
+const MapView = dynamic(() => import("./MapView"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full min-h-[400px] bg-white/[0.02] rounded-2xl border border-white/[0.06] flex items-center justify-center">
+      <p className="text-white/20 text-sm">Loading map...</p>
+    </div>
+  ),
+});
 
 interface StoreLocation {
   id: string;
@@ -17,18 +27,26 @@ const locations: StoreLocation[] = [
   {
     id: "my-brother",
     name: "My Brother Supermarket",
-    region: "Takoradi",
-    address: "Market Circle Area, Takoradi",
-    lat: 4.8918,
-    lng: -1.7550,
+    region: "Western Region",
+    address: "27 Collins St, Takoradi",
+    lat: 4.89763000697724,
+    lng: -1.7627794558196435,
   },
   {
-    id: "carlos",
-    name: "Carlos Supermarket",
-    region: "Takoradi",
-    address: "Chapel Hill, Takoradi",
-    lat: 4.9010,
-    lng: -1.7630,
+    id: "carlos-plus",
+    name: "Carlos Plus Supermarket",
+    region: "Western Region",
+    address: "Joe D. Laryea St, Takoradi",
+    lat: 4.8988365239682965,
+    lng: -1.762087964417992,
+  },
+  {
+    id: "ransbet",
+    name: "Ransbet Supermarket",
+    region: "Western Region",
+    address: "Tarkwa",
+    lat: 5.306552175519182,
+    lng: -1.9943943468992227,
   },
 ];
 
@@ -37,7 +55,7 @@ const regions = ["All", ...Array.from(new Set(locations.map((l) => l.region)))];
 export default function FindUsSection() {
   const [search, setSearch] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("All");
-  const [activeLocation, setActiveLocation] = useState<StoreLocation>(locations[0]);
+  const [activeLocation, setActiveLocation] = useState<StoreLocation | null>(null);
 
   const filtered = useMemo(() => {
     return locations.filter((loc) => {
@@ -55,12 +73,11 @@ export default function FindUsSection() {
     setActiveLocation(loc);
   }, []);
 
-  const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${activeLocation.lng - 0.01}%2C${activeLocation.lat - 0.008}%2C${activeLocation.lng + 0.01}%2C${activeLocation.lat + 0.008}&layer=mapnik&marker=${activeLocation.lat}%2C${activeLocation.lng}`;
+  const showOverview = () => setActiveLocation(null);
 
   return (
     <section id="find-us" className="relative bg-enak-dark overflow-hidden">
       <div className="section-divider" />
-
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-enak-green/[0.02] blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-44">
@@ -81,20 +98,9 @@ export default function FindUsSection() {
           <div className="grid lg:grid-cols-5 gap-8 lg:gap-6">
             {/* Left: Search & Location List */}
             <div className="lg:col-span-2 flex flex-col gap-4">
-              {/* Search input */}
               <div className="relative">
-                <svg
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                  />
+                <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                 </svg>
                 <input
                   type="text"
@@ -105,7 +111,6 @@ export default function FindUsSection() {
                 />
               </div>
 
-              {/* Region filter tabs */}
               <div className="flex gap-2 flex-wrap">
                 {regions.map((region) => (
                   <button
@@ -122,8 +127,21 @@ export default function FindUsSection() {
                 ))}
               </div>
 
-              {/* Location list */}
-              <div className="flex flex-col gap-2 max-h-[360px] overflow-y-auto pr-1 custom-scrollbar">
+              <button
+                onClick={showOverview}
+                className={`w-full py-2.5 px-4 rounded-xl border text-xs font-medium tracking-wide uppercase transition-all duration-300 flex items-center justify-center gap-2 ${
+                  activeLocation === null
+                    ? "border-enak-green/30 bg-enak-green/[0.08] text-enak-green-light"
+                    : "border-white/[0.06] text-white/40 hover:border-white/[0.12] hover:text-white/60"
+                }`}
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+                </svg>
+                Show All on Map
+              </button>
+
+              <div className="flex flex-col gap-2 max-h-[360px] overflow-y-auto pr-1">
                 <AnimatePresence mode="popLayout">
                   {filtered.length === 0 ? (
                     <motion.p
@@ -131,7 +149,7 @@ export default function FindUsSection() {
                       animate={{ opacity: 1 }}
                       className="text-white/30 text-sm text-center py-8"
                     >
-                      No locations found. Try a different search.
+                      No locations found.
                     </motion.p>
                   ) : (
                     filtered.map((loc) => (
@@ -143,7 +161,7 @@ export default function FindUsSection() {
                         exit={{ opacity: 0, y: -10 }}
                         onClick={() => handleLocationClick(loc)}
                         className={`w-full text-left p-4 rounded-xl border transition-all duration-300 ${
-                          activeLocation.id === loc.id
+                          activeLocation?.id === loc.id
                             ? "border-enak-gold/30 bg-enak-gold/[0.05]"
                             : "border-white/[0.04] hover:border-white/[0.1] bg-white/[0.02]"
                         }`}
@@ -151,7 +169,7 @@ export default function FindUsSection() {
                         <div className="flex items-start gap-3">
                           <div
                             className={`mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                              activeLocation.id === loc.id
+                              activeLocation?.id === loc.id
                                 ? "bg-enak-gold/20 text-enak-gold"
                                 : "bg-white/[0.04] text-white/30"
                             }`}
@@ -162,7 +180,7 @@ export default function FindUsSection() {
                             </svg>
                           </div>
                           <div className="min-w-0">
-                            <p className={`text-sm font-semibold truncate ${activeLocation.id === loc.id ? "text-enak-gold" : "text-white/80"}`}>
+                            <p className={`text-sm font-semibold truncate ${activeLocation?.id === loc.id ? "text-enak-gold" : "text-white/80"}`}>
                               {loc.name}
                             </p>
                             <p className="text-white/35 text-xs mt-0.5 truncate">
@@ -179,27 +197,18 @@ export default function FindUsSection() {
                 </AnimatePresence>
               </div>
 
-              <p className="text-white/15 text-[10px] text-center mt-2">
+              <p className="text-white/15 text-[10px] text-center mt-1">
                 More locations coming soon
               </p>
             </div>
 
-            {/* Right: Map */}
+            {/* Right: Leaflet Map — height matches left content */}
             <div className="lg:col-span-3">
-              <div className="relative rounded-2xl overflow-hidden border border-white/[0.06] bg-white/[0.02]">
-                <div className="absolute top-4 left-4 z-10 bg-enak-dark/80 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/[0.06]">
-                  <p className="text-enak-gold text-xs font-semibold font-heading">{activeLocation.name}</p>
-                  <p className="text-white/40 text-[10px]">{activeLocation.address}</p>
-                </div>
-                <iframe
-                  key={activeLocation.id}
-                  title={`Map - ${activeLocation.name}`}
-                  width="100%"
-                  height="420"
-                  src={mapUrl}
-                  className="border-0 w-full"
-                  style={{ filter: "invert(0.92) hue-rotate(180deg) brightness(1.1) contrast(1.1) saturate(0.3)" }}
-                  loading="lazy"
+              <div className="relative rounded-2xl overflow-hidden border border-white/[0.06] bg-white/[0.02] h-full min-h-[450px] lg:min-h-0">
+                <MapView
+                  locations={filtered}
+                  activeLocation={activeLocation}
+                  className="h-full min-h-[450px]"
                 />
               </div>
             </div>

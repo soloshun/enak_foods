@@ -35,7 +35,7 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-[999] transition-all duration-500 ${
           scrolled
             ? "bg-enak-dark/95 backdrop-blur-md shadow-lg shadow-black/20 py-3"
             : "bg-transparent py-5"
@@ -118,7 +118,7 @@ export default function Navbar() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="gold-gradient text-enak-dark font-bold px-8 py-3 rounded-full text-lg mt-4"
+              className="font-heading gold-gradient text-enak-dark font-bold px-8 py-3 rounded-full text-lg mt-4"
             >
               Order Now
             </motion.a>

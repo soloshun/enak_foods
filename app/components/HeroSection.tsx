@@ -1,7 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+
+const rotatingWords = ["A Story", "Pure Joy", "A Smile", "The Fun", "Real Love"];
 
 const highlights = [
   { value: "NO", label: "Artificial\nFlavors" },
@@ -11,9 +13,17 @@ const highlights = [
 
 export default function HeroSection() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
     setIsLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % rotatingWords.length);
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const scrollToProducts = () => {
@@ -34,8 +44,7 @@ export default function HeroSection() {
         <source src="/commercial1.mp4" type="video/mp4" />
       </video>
 
-      <div className="hero-overlay absolute inset-0 z-10" />
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-enak-dark to-transparent z-10" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/75 via-black/60 to-enak-dark" />
 
       <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-4 sm:px-8">
         <motion.div
@@ -49,23 +58,44 @@ export default function HeroSection() {
           </span>
         </motion.div>
 
-        <motion.h1
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-          className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white max-w-5xl leading-[1.05] tracking-tight"
+          className="max-w-4xl"
         >
-          More Than Just Chips.{" "}
-          <span className="text-gold-gradient">
-            A Story in Every Crunch.
-          </span>
-        </motion.h1>
+          <p className="font-heading text-lg sm:text-xl md:text-2xl text-white/60 tracking-wide uppercase font-medium mb-3">
+            More Than Just Chips.
+          </p>
+
+          <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-[0.95] tracking-tight">
+            {/* Rotating word line */}
+            <span className="block h-[1.05em] overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={wordIndex}
+                  initial={{ y: "100%", opacity: 0 }}
+                  animate={{ y: "0%", opacity: 1 }}
+                  exit={{ y: "-100%", opacity: 0 }}
+                  transition={{ duration: 0.45, ease: "easeInOut" }}
+                  className="block text-gold-gradient"
+                >
+                  {rotatingWords[wordIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
+            {/* Static line */}
+            <span className="block text-white">
+              in Every Crunch.
+            </span>
+          </h1>
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-          className="mt-6 text-base sm:text-lg text-white/50 max-w-lg leading-relaxed font-light"
+          className="mt-7 text-base sm:text-lg text-white/70 max-w-md leading-relaxed"
         >
           Carefully made plantain chips, crafted with patience, quality, and love.
         </motion.p>
@@ -77,7 +107,7 @@ export default function HeroSection() {
           className="mt-10 flex flex-col sm:flex-row gap-4"
         >
           <a
-            href="https://wa.me/233558283738?text=Hi!%20I%20would%20like%20to%20order%20Enak%20Plantain%20Chips"
+            href="https://wa.me/233247861005?text=Hi!%20I%20would%20like%20to%20order%20Enak%20Plantain%20Chips"
             target="_blank"
             rel="noopener noreferrer"
             className="gold-gradient text-enak-dark font-bold px-8 py-4 rounded-full text-base hover:scale-105 transition-transform duration-300 animate-pulse-glow flex items-center gap-2"
@@ -95,19 +125,18 @@ export default function HeroSection() {
           </button>
         </motion.div>
 
-        {/* Natural highlight badges like Pepsi style */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0 }}
+          animate={isLoaded ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
-          className="absolute bottom-24 sm:bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-6 sm:gap-10"
+          className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-8 sm:gap-12"
         >
           {highlights.map((h, i) => (
             <div key={i} className="text-center">
-              <p className="font-heading text-xl sm:text-2xl font-extrabold text-enak-gold leading-none">
+              <p className="font-heading text-lg sm:text-2xl font-extrabold text-enak-gold leading-none">
                 {h.value}
               </p>
-              <p className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider mt-1 whitespace-pre-line leading-tight font-medium">
+              <p className="text-[9px] sm:text-xs text-white/50 uppercase tracking-wider mt-1 whitespace-pre-line leading-tight font-medium">
                 {h.label}
               </p>
             </div>

@@ -31,7 +31,7 @@ export default function OrderSection() {
 
               <div className="mt-10 flex flex-col sm:flex-row gap-4">
                 <a
-                  href="https://wa.me/233558283738?text=Hi!%20I%20would%20like%20to%20order%20Enak%20Plantain%20Chips"
+                  href="https://wa.me/233247861005?text=Hi!%20I%20would%20like%20to%20order%20Enak%20Plantain%20Chips"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="gold-gradient text-enak-dark font-bold px-8 py-4 rounded-full text-lg hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-3"
