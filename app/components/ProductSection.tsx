@@ -206,7 +206,7 @@ function ProductModal({
                 <p className="text-white/60 text-sm">{product.ingredients}</p>
               </div>
 
-              <div>
+              {/* <div>
                 <p className="text-enak-gold text-[10px] uppercase tracking-widest font-semibold mb-2">
                   Nutrition per serving
                 </p>
@@ -218,7 +218,7 @@ function ProductModal({
                     </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
                 <span className="text-white/30 text-xs uppercase tracking-wider">Size</span>
