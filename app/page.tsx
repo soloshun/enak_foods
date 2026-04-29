@@ -1,11 +1,13 @@
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
-import StorySection from "./components/StorySection";
+import NaturalSection from "./components/NaturalSection";
+// import StorySection from "./components/StorySection";
 import ProductSection from "./components/ProductSection";
-import WhyUsSection from "./components/WhyUsSection";
+// import WhyUsSection from "./components/WhyUsSection";
 import OrderSection from "./components/OrderSection";
-import SocialProofSection from "./components/SocialProofSection";
-import FAQSection from "./components/FAQSection";
+import FindUsSection from "./components/FindUsSection";
+// import SocialProofSection from "./components/SocialProofSection";
+// import FAQSection from "./components/FAQSection";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -13,12 +15,14 @@ export default function Home() {
     <main className="bg-enak-dark">
       <Navbar />
       <HeroSection />
-      <StorySection />
+      <NaturalSection />
+      {/* <StorySection /> */}
       <ProductSection />
-      <WhyUsSection />
+      {/* <WhyUsSection /> */}
       <OrderSection />
-      <SocialProofSection />
-      <FAQSection />
+      <FindUsSection />
+      {/* <SocialProofSection /> */}
+      {/* <FAQSection /> */}
       <Footer />
     </main>
   );

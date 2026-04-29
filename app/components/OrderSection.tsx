@@ -5,7 +5,7 @@ import ScrollReveal from "./ScrollReveal";
 
 export default function OrderSection() {
   return (
-    <section id="order" className="relative bg-enak-dark py-24 sm:py-32 overflow-hidden">
+    <section id="order" className="relative bg-enak-dark pb-24 sm:pb-32 overflow-hidden">
       <div className="section-divider mb-24" />
 
       <div className="absolute inset-0">
@@ -19,7 +19,7 @@ export default function OrderSection() {
               <span className="text-enak-gold text-sm tracking-[0.3em] uppercase font-medium">
                 Get Yours Today
               </span>
-              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+              <h2 className="font-heading mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight">
                 Ready to{" "}
                 <span className="text-gold-gradient">Crunch?</span>
               </h2>
@@ -53,33 +53,6 @@ export default function OrderSection() {
                 </a>
               </div>
 
-              <div className="mt-10 pt-8 border-t border-white/[0.06]">
-                <p className="text-white/40 text-sm mb-4 uppercase tracking-wider font-medium">
-                  Find us at
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="flex items-center gap-3 glass-card rounded-xl px-5 py-3">
-                    <svg className="w-5 h-5 text-enak-green-light shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                    </svg>
-                    <div>
-                      <p className="text-white text-sm font-medium">My Brother Supermarket</p>
-                      <p className="text-white/40 text-xs">Takoradi</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 glass-card rounded-xl px-5 py-3">
-                    <svg className="w-5 h-5 text-enak-green-light shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                    </svg>
-                    <div>
-                      <p className="text-white text-sm font-medium">Carlos Supermarket</p>
-                      <p className="text-white/40 text-xs">Takoradi</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </ScrollReveal>
 

@@ -5,9 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const navLinks = [
-  { label: "Story", href: "#story" },
   { label: "Products", href: "#products" },
-  { label: "Why Us", href: "#why-us" },
+  { label: "Find Us", href: "#find-us" },
   { label: "Order", href: "#order" },
 ];
 
@@ -47,11 +46,11 @@ export default function Navbar() {
             <Image
               src="/enak_logo_2.jpeg"
               alt="Enak Foods"
-              width={48}
-              height={48}
+              width={44}
+              height={44}
               className="rounded-full border-2 border-enak-gold/50"
             />
-            <span className="text-white font-bold text-xl tracking-tight hidden sm:block">
+            <span className="font-heading text-white font-bold text-xl tracking-tight hidden sm:block">
               Enak <span className="text-enak-gold">Foods</span>
             </span>
           </a>
@@ -61,7 +60,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-white/80 hover:text-enak-gold transition-colors duration-300 text-sm font-medium tracking-wide uppercase"
+                className="text-white/70 hover:text-enak-gold transition-colors duration-300 text-sm font-medium tracking-wide uppercase"
               >
                 {link.label}
               </a>
@@ -82,21 +81,9 @@ export default function Navbar() {
             aria-label="Toggle menu"
           >
             <div className="w-6 flex flex-col gap-1.5">
-              <span
-                className={`block h-0.5 bg-enak-gold transition-all duration-300 ${
-                  mobileOpen ? "rotate-45 translate-y-2" : ""
-                }`}
-              />
-              <span
-                className={`block h-0.5 bg-enak-gold transition-all duration-300 ${
-                  mobileOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`block h-0.5 bg-enak-gold transition-all duration-300 ${
-                  mobileOpen ? "-rotate-45 -translate-y-2" : ""
-                }`}
-              />
+              <span className={`block h-0.5 bg-enak-gold transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
+              <span className={`block h-0.5 bg-enak-gold transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
+              <span className={`block h-0.5 bg-enak-gold transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
             </div>
           </button>
         </div>
@@ -119,7 +106,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="text-white text-2xl font-light tracking-widest uppercase hover:text-enak-gold transition-colors"
+                className="font-heading text-white text-2xl font-light tracking-widest uppercase hover:text-enak-gold transition-colors"
               >
                 {link.label}
               </motion.a>
@@ -130,7 +117,7 @@ export default function Navbar() {
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.3 }}
               className="gold-gradient text-enak-dark font-bold px-8 py-3 rounded-full text-lg mt-4"
             >
               Order Now
