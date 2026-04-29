@@ -68,17 +68,17 @@ export const metadata: Metadata = {
     siteName: "Enak Foods",
     images: [
       {
+        url: "/p3_2.png",
+        width: 1216,
+        height: 873,
+        alt: "Enak Crunchy Plantain Chips — Ripe and Unripe jar display, made in Ghana",
+        type: "image/png",
+      },
+      {
         url: "/p1.jpeg",
         width: 1200,
         height: 630,
         alt: "Enak Crunchy Plantain Chips — Ripe and Unripe varieties",
-        type: "image/jpeg",
-      },
-      {
-        url: "/flyer1.jpeg",
-        width: 1200,
-        height: 630,
-        alt: "Enak Foods full product range — pouches, jars, and bulk bags",
         type: "image/jpeg",
       },
     ],
@@ -88,7 +88,14 @@ export const metadata: Metadata = {
     title: "Enak Foods — Crunchy Plantain Chips",
     description:
       "100% natural plantain chips from Takoradi, Ghana. No preservatives, no artificial colors. FDA approved. Order via WhatsApp!",
-    images: ["/p1.jpeg"],
+    images: [
+      {
+        url: "/p3_2.png",
+        width: 1216,
+        height: 873,
+        alt: "Enak Crunchy Plantain Chips — Ripe and Unripe jars",
+      },
+    ],
     creator: "@enakfoods",
   },
   robots: {
@@ -115,7 +122,7 @@ function JsonLd() {
       "Premium crunchy plantain chips made in Takoradi, Ghana. 100% natural ingredients — plantain, salt, and vegetable oil. FDA approved.",
     url: siteUrl,
     logo: `${siteUrl}/enak_logo_2.jpeg`,
-    image: `${siteUrl}/p1.jpeg`,
+    image: `${siteUrl}/p3_2.png`,
     telephone: ["+233558283738", "+233247861005"],
     email: "enakfoods23@gmail.com",
     address: {
@@ -150,7 +157,12 @@ function JsonLd() {
     name: "Enak Crunchy Plantain Chips",
     description:
       "Freshly made crunchy plantain chips from Takoradi, Ghana. Available in Ripe and Unripe flavors. 100% natural — plantain, salt, and vegetable oil.",
-    image: [`${siteUrl}/p1.jpeg`, `${siteUrl}/p2.jpeg`, `${siteUrl}/p3.jpeg`],
+    image: [
+      `${siteUrl}/p3_2.png`,
+      `${siteUrl}/p1.jpeg`,
+      `${siteUrl}/p2.jpeg`,
+      `${siteUrl}/p3.jpeg`,
+    ],
     brand: {
       "@type": "Brand",
       name: "Enak Foods",
